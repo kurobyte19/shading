@@ -10,7 +10,7 @@ void main(){
     vec2 st = gl_FragCoord.xy/u_resolution;
     // vec2 mouseNorm = u_mouse/u_resolution;
 
-    float x = u_time / 2.50;
+    float x = u_time / 4.50;
     float path = abs(sin(x * 12.56) * 0.50); // wont work as expected
 
     float oscillator = abs(sin(u_time));
