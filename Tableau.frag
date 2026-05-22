@@ -1,75 +1,52 @@
+// highly inefficient code
+
 #ifdef GL_ES
 precision mediump float;
 #endif
 
-#define PI 3.14159265359
-
 uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-uniform float u_time;
 
 vec3 red    = vec3(0.78, 0.12, 0.12);
 vec3 yellow = vec3(0.98, 0.84, 0.08);
 vec3 blue   = vec3(0.08, 0.35, 0.64);
+vec3 bg  = vec3(0.9059, 0.8627, 0.749);
+float drawRect(float length, float width, vec2 pos, vec2 st){
+    float top = step(1.00 - (length + pos.y) , 1.00 - st.y);
+    float bottom = step(pos.y , st.y);
+
+    float left = step(pos.x, st.x);
+    float right = step(1.00 - (width + pos.x), 1.00 - st.x);
+
+    return (left * bottom * top * right);
+}
 
 void main(){
     vec2 st = gl_FragCoord.xy / u_resolution;
 
-    // HL1
-    float bottom1 = step(0.4, st.y - 0.47);
-    float left1 = step(0.4, st.x + 0.6);
-    float top1 = step(0.4, 1.00 - st.y + 0.3);
-    float right1 = step(0.4, 1.00 - st.x + 0.6);
-    float hl1 = bottom1 * left1 * top1 * right1;
+    float vr1 = drawRect(0.66, 0.17, vec2(0.0,0.0), st);
+    float vr2 = drawRect(0.56, 0.52, vec2(0.20,0.1), st);
+    float vr3 = drawRect(0.15, 0.52, vec2(0.20,0.69), st);
+    float vr4 = drawRect(0.15, 0.52, vec2(0.20,0.87), st);
+    float vr5 = drawRect(0.07, 0.52, vec2(0.20,0.0), st);
+    float vr6 = drawRect(0.07, 0.19, vec2(0.75,0.0), st);
+    float vr7 = drawRect(0.07, 0.1, vec2(0.97,0.0), st);
+    float vr8 = drawRect(0.56, 0.19, vec2(0.75,0.1), st);
+    float vr9 = drawRect(0.15, 0.19, vec2(0.75,0.69), st);
+    float vr10 = drawRect(0.15, 0.19, vec2(0.75,0.87), st);
+    float vr11 = drawRect(0.56, 0.1, vec2(0.97,0.1), st);
+    float vr12 = drawRect(0.15, 0.1, vec2(0.97,0.69), st);
+    float vr13 = drawRect(0.15, 0.1, vec2(0.97,0.87), st);
+    float vr14 = drawRect(0.15, 0.07, vec2(0.098,0.69), st);
+    float vr15 = drawRect(0.15, 0.07, vec2(0.098,0.87), st);
+    float vr16 = drawRect(0.15, 0.06, vec2(0.0,0.69), st);
+    float vr17 = drawRect(0.15, 0.06, vec2(0.0,0.87), st);
 
-    // HL 2
-    float bottom2 = step(0.4, st.y - 0.32);
-    float left2 = step(0.4, st.x + 0.6 );
-    float top2 = step(0.4, 1.00 - st.y + 0.15);
-    float right2 = step(0.4, 1.00 - st.x + 0.6 );
-    float hl2 = bottom2 * left2 * top2 * right2;
+    vec3 yellowBox = mix(vec3(0,0,0), yellow, (vr12 + vr13));
+    vec3 blueBox = mix(vec3(0,0,0), blue, (vr6 + vr7));
+    vec3 redBox = mix(vec3(0,0,0), red,(vr14 + vr15 + vr16 + vr17));
+    vec3 normalBox = mix(vec3(0,0,0), bg, (vr1 + vr2 + vr3 + vr4 + vr5 + vr8 + vr9 + vr10 + vr11));
 
-    // HL 3
-    float bottom3 = step(0.4, st.y + 0.3);
-    float left3 = step(0.4, st.x + 0.2);
-    float top3 = step(0.4, 1.00 - st.y - 0.47);
-    float right3 =  step(0.4, 1.00 - st.x + 0.6);
-    float hl3 = bottom3 * left3 * top3 * right3;
+    vec3 color = vec3(yellowBox + blueBox + redBox + normalBox);
 
-    // VL 1
-    float bottom4 = step(0.4, st.y - 0.32);
-    float left4 = step(0.4, st.x + 0.32);
-    float top4 = step(0.4, 1.00 - st.y + 0.6);
-    float right4 =  step(0.4, 1.00 - st.x - 0.48);
-    float hl4 = bottom4 * left4 * top4 * right4;
-
-    // VL 2
-    float bottom5 = step(0.4, st.y + 0.6);
-    float left5 = step(0.4, st.x + 0.2);
-    float top5 = step(0.4, 1.00 - st.y + 0.6);
-    float right5 =  step(0.4, 1.00 - st.x - 0.36);
-    float hl5 = bottom5 * left5 * top5 * right5;
-
-    // VL 3
-    float bottom6 = step(0.4, st.y + 0.6);
-    float left6 = step(0.4, st.x - 0.3);
-    float top6 = step(0.4, 1.00 - st.y + 0.6);
-    float right6 =  step(0.4, 1.00 - st.x + 0.14);
-    float hl6 = bottom6 * left6 * top6 * right6;
-
-    // VL 4
-    float bottom7 = step(0.4, st.y + 0.6);
-    float left7 = step(0.4, st.x - 0.52);
-    float top7 = step(0.4, 1.00 - st.y + 0.6);
-    float right7 =  step(0.4, 1.00 - st.x + 0.36);
-    float hl7 = bottom7 * left7 * top7 * right7;
-
-    // if ( st.x )
-
-    // mix(red, black, if ());
-
-
-    float color = clamp((hl1 + hl2 + hl3 + hl4 + hl5 + hl6 + hl7), 0.00, 1.00);
-    gl_FragColor = vec4(vec3(color), 1.00);
-
+    gl_FragColor = vec4(color, 1.00);
 }
