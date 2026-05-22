@@ -8,7 +8,7 @@ uniform float u_time;
 vec3 skyLight = vec3(0.984, 0.502, 0.220);
 vec3 skyDark  = vec3(0.204, 0.373, 0.612);
 vec3 sunCore   = vec3(0.980, 0.320, 0.180);
-vec3 sunEdge   = vec3(1.000, 0.580, 0.280);
+vec3 sunEdge   = vec3(1.0, 0.6627, 0.4235);
 vec3 black = vec3(0.00);
 vec3 white = vec3(1.00);
 
@@ -41,10 +41,10 @@ void main(){
     bigDipper += genStarMask(0.009,vec2(0.58, 0.8), st);
     bigDipper += genStarMask(0.009,vec2(0.68, 0.75), st);
     bigDipper += genStarMask(0.009,vec2(0.79, 0.89), st);
-    bigDipper += genStarMask(0.009,vec2(0.83, 0.7), st);
+    bigDipper += genStarMask(0.009,vec2(0.83, 0.78), st);
     
-
-    vec3 sun = vec3(mix(sunCore, sunEdge, st.y));
+    float t = smoothstep(0.15, 0.4, st.y);
+    vec3 sun = vec3(mix(sunCore, sunEdge, t));
     vec3 sky = vec3(mix(skyLight, skyDark, st.y * 1.00));
     vec3 mountain = vec3(mix(black, white, 0.00));
     vec3 star = vec3(mix(black, white, 1.00));

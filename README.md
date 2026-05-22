@@ -7,7 +7,7 @@ This repository contains recent artwork I recreated in GLSL.
     <em>Piet Mondrian - Tableau (1921)</em>
   </span>
   <span style="display: inline-block; text-align: center;">
-    <img src="https://github.com/kurobyte19/kuro-site-images/blob/main/projects/evening.png?raw=true" alt="Childish Evening" />
+    <img src="https://github.com/kurobyte19/kuro-site-images/blob/main/projects/littledipper.png?raw=true" alt="Childish Evening" />
     <br>
     <em>Innocent Little Dipper</em>
   </span>
