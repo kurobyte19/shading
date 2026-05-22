@@ -22,7 +22,7 @@ void main(){
     - x - a * sin(-10.00
     * (atan((st.y - 0.50), (st.x - 0.50)))+u_time*3.00);
 
-    float line = 1.00 - smoothstep(0.0, 0.01, abs(y));
+    float line = smoothstep(0.0, 0.01, abs(y));
 
     vec3 canvas = vec3(1.00);
 

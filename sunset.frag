@@ -16,7 +16,7 @@ vec3 waterDeep   = vec3(0.065, 0.145, 0.290);   // Deep dark water (base)
 vec3 waterReflect = vec3(0.980, 0.580, 0.320);  // Warm orange-gold reflection
 
 float plot(float pct, vec2 st){
-    return 1.00 - smoothstep(pct , pct+0.08, st.y) ;
+    return 1.00 - smoothstep(pct , pct+0., st.y) ;
 }
 
 void main(){
